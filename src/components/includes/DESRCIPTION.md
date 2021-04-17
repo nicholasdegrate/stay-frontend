@@ -1,0 +1,1 @@
+this has all the components that are not specified to any page or components
