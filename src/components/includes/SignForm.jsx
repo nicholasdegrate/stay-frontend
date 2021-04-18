@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useHistory } from 'react-router-dom';
+import { FormControl, FormLabel, FormErrorMessage, FormHelperText, Input } from '@chakra-ui/react';
 
 // utils
 import { login } from '../../utils/detect-auth';
@@ -41,7 +42,7 @@ export function SignForm() {
 			>
 				{({ isSubmitting, handleChange }) => (
 					<Form>
-						<Field type="text" name="name" onChange={handleChange} placeholder="name" />
+						<Field as={Input} type="text" name="name" onChange={handleChange} placeholder="name" />
 						<Field type="email" name="email" onChange={handleChange} placeholder="email" />
 						<Field type="password" name="password" onChange={handleChange} placeholder="password" />
 						<button type="submit" disabled={isSubmitting}>

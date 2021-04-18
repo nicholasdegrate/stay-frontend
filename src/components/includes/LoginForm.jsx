@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useHistory } from 'react-router-dom';
+import { FormControl, Input, Box, Button } from '@chakra-ui/react';
 
 // utils
 import { login } from '../../utils/detect-auth';
@@ -42,11 +43,29 @@ export function LoginForm() {
 			>
 				{({ isSubmitting, handleChange }) => (
 					<Form>
-						<Field type="email" name="email" onChange={handleChange} placeholder="email" />
-						<Field type="password" name="password" onChange={handleChange} placeholder="password" />
-						<button type="submit" disabled={isSubmitting}>
-							Submit
-						</button>
+						<Box w="400px">
+							<FormControl>
+								<Field
+									as={Input}
+									type="email"
+									name="email"
+									onChange={handleChange}
+									placeholder="email"
+								/>
+							</FormControl>
+							<FormControl>
+								<Field
+									as={Input}
+									type="password"
+									name="password"
+									onChange={handleChange}
+									placeholder="password"
+								/>
+							</FormControl>
+							<Button type="submit" disabled={isSubmitting}>
+								Submit
+							</Button>
+						</Box>
 					</Form>
 				)}
 			</Formik>
