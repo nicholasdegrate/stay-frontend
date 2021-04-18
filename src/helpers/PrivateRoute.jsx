@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-// component
+// utils
 import { isLogin } from '../utils/detect-auth';
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
