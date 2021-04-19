@@ -23,7 +23,7 @@ import { isLogin } from './utils/detect-auth';
 export default function App() {
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector((state) => state.currentHost);
-
+	console.log(currentUser);
 	useEffect(
 		() => {
 			if (isLogin()) {
@@ -46,7 +46,7 @@ export default function App() {
 	return (
 		<ChakraProvider resetCSS={true}>
 			<Router>
-				{!currentUser && <NavBar />}
+				{(!currentUser || isLogin() === false) && <NavBar />}
 				<Switch>
 					{/* Public */}
 					<PublicRoute restricted={false} component={Home} path="/" exact />

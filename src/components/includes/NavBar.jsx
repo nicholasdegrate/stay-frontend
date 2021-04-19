@@ -1,11 +1,8 @@
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Box, Flex, Heading, Button } from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
 
 export function NavBar() {
-	const { currentUser } = useSelector((state) => state.currentHost);
-
 	return (
 		<Fragment>
 			<Flex id="navbar" alignItems="center" justifyContent="space-between" h="50px" m="1em">
