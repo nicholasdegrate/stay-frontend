@@ -12,4 +12,4 @@ export const logout = () => localStorage.removeItem(TOKEN)
 /* 
     checking the current user is still logged in
 */
-export const isLogin = () => localStorage.getItem(TOKEN) ? true : false 
+export const isLogin = () => localStorage.getItem(TOKEN) ? localStorage.getItem(TOKEN) : false 
