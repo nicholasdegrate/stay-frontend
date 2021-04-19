@@ -22,14 +22,21 @@ import { logout } from '../utils/detect-auth';
 // image
 import logoutBtn from '../image/logout.svg';
 
+// components
+import { NewFormDrawer } from '../components/Property/newFormDrawer';
+import { Properties } from '../components/Property/Properties';
+
 export default function DashBoard() {
 	const history = useHistory();
 	const { currentUser } = useSelector((state) => state.currentHost);
+	const { handleDrawer } = useSelector((state) => state.property);
 
 	const handleLogout = () => {
 		logout();
 		history.push('/');
 	};
+
+	const handleDrawerNewProperty = () => handleDrawer();
 
 	if (currentUser === null) return <Redirect to="/dashboard" />;
 
@@ -58,16 +65,17 @@ export default function DashBoard() {
 			<Box bg="#F6F8FC">
 				<Grid alignItems="center" padding="2em" gridTemplateColumns="75% 25%" h="100px" w="100%">
 					<Box>
-						<InputGroup>
+						<InputGroup bg="#fff" maxWidth="60%" borderRadius="10px">
 							<InputLeftElement pointerEvents="none" children={<SearchIcon />} />
-							<Input maxWidth="60%" type="text" placeholder="Search property, user, provider etc" />
+							<Input type="text" placeholder="Search property, user, provider etc" />
 						</InputGroup>
 					</Box>
 					<Flex justifyContent="space-evenly" alignItems="center">
-						<ButtonGroup size="sm" isAttached variant="outline">
+						<ButtonGroup onClick={handleDrawerNewProperty} size="sm" isAttached variant="outline">
 							<Button borderRadius="10px">Create Listing</Button>
 							<IconButton aria-label="Add to friends" icon={<AddIcon />} />
 						</ButtonGroup>
+						{handleDrawerNewProperty && <NewFormDrawer />}
 						<Box
 							display="flex"
 							justifyContent="center"
@@ -94,13 +102,10 @@ export default function DashBoard() {
 							</ButtonGroup>
 						</Box>
 					</Grid>
-					<Box padding="3em .5em">
-						<Box w="100%" h="150px" bg="#505050" borderRadius="15px">
-							<Grid>
-								<Image />
-								<Grid>hello</Grid>
-							</Grid>
-						</Box>
+					<Box padding="1em .5em">
+						{/* property start */}
+						<Properties />
+						{/* property end */}
 					</Box>
 				</Grid>
 			</Box>

@@ -16,6 +16,8 @@ html, body {
 img {
     height: 100%;
     width: 100%;
+    object-fit: cover;
+    outline: none
 }
 /* 
     navbar
@@ -36,3 +38,40 @@ img {
     padding: 1em 0;
     font-weight: 600;
 }
+
+/* 
+    stars
+*/
+
+.score {
+    display: block;
+    font-size: 16px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+  
+  .score-wrap {
+    display: inline-block;
+    position: relative;
+    height: 19px;
+  }
+  
+  .score .stars-active {
+    color: #EEBD01;
+    position: relative;
+    z-index: 10;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .score .stars-inactive {
+    color: grey;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-text-stroke: initial;
+    /* overflow: hidden; */
+  }

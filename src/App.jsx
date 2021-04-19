@@ -23,7 +23,6 @@ import { isLogin } from './utils/detect-auth';
 export default function App() {
 	const dispatch = useDispatch();
 	const { currentUser } = useSelector((state) => state.currentHost);
-	console.log(currentUser);
 	useEffect(
 		() => {
 			if (isLogin()) {
