@@ -1,0 +1,1 @@
+export const CURRENT_HOST = 'CURRENT_HOST'

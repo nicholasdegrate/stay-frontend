@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useHistory } from 'react-router-dom';
-import { FormControl, FormLabel, FormErrorMessage, FormHelperText, Input } from '@chakra-ui/react';
+import { Input } from '@chakra-ui/react';
 
 // utils
 import { login } from '../../utils/detect-auth';

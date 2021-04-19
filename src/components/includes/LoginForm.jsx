@@ -1,13 +1,21 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useCallback } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { FormControl, Input, Box, Button } from '@chakra-ui/react';
-
-// utils
-import { login } from '../../utils/detect-auth';
+import { useDispatch } from 'react-redux';
+// redux
+import { hostPostFetch } from '../../redux/actions/hostPostFetch';
 
 export function LoginForm() {
 	const history = useHistory();
+	const dispatch = useDispatch();
+
+	const handleWillunMount = useCallback(
+		(values, setSubmitting, history) => {
+			dispatch(hostPostFetch(values, setSubmitting, history));
+		},
+		[ dispatch ]
+	);
 
 	return (
 		<Fragment>
@@ -16,28 +24,7 @@ export function LoginForm() {
 				initialValues={{ email: '', password: '' }}
 				onSubmit={(values, { setSubmitting }) => {
 					setTimeout(() => {
-						fetch('http://localhost:3000/api/v1/login', {
-							method: 'POST',
-							headers: { 'Content-Type': 'application/json' },
-							body: JSON.stringify(values)
-						})
-							.then((r) => {
-								if (r.ok) {
-									return r.json();
-								} else {
-									return r.json().then((data) => {
-										throw data;
-									});
-								}
-							})
-							.then((data) => {
-								console.log(data);
-								login(data.token);
-
-								history.push('/dashboard');
-							})
-							.catch((err) => console.log(err));
-						setSubmitting(false);
+						handleWillunMount(values, setSubmitting, history);
 					}, 400);
 				}}
 			>

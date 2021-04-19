@@ -5,9 +5,14 @@ import { Box, Grid, Heading, Text, Button, Image } from '@chakra-ui/react';
 import apartment from '../image/home.jpg';
 
 export default function Home() {
-	const whitespace = [ ...Array(80).keys() ].map((i) => <Box h="5px" w="5px" bg="gray.300" borderRadius="10px" />);
+	const whitespace = [ ...Array(80).keys() ].map((i) => (
+		<Box key={i} h="5px" w="5px" bg="gray.300" borderRadius="10px" />
+	));
 
-	const whitespaceOne = [ ...Array(100).keys() ].map((i) => <Box h="5px" w="5px" bg="#e7bfa4" borderRadius="10px" />);
+	const whitespaceOne = [ ...Array(100).keys() ].map((i) => (
+		<Box key={i} h="5px" w="5px" bg="#e7bfa4" borderRadius="10px" />
+	));
+
 	return (
 		<Fragment>
 			<Box position="absolute" bg="#FFF8F8" zIndex={-1} h="80%" w="50%" top="-1em" />
