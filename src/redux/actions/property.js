@@ -22,6 +22,7 @@ export const getFetchProperties = (id) => {
 	};
 };
 
+
 export const postFetchProperties = (properties) => {
 	return (dispatch) => {
 		fetch('http://localhost:3000/api/v1/properties', {
@@ -38,8 +39,8 @@ export const postFetchProperties = (properties) => {
 					});
 				}
 			})
-			.then(({data}) => {
-				dispatch({ type: NEW_PROPERTY, payload: data[0]})
+			.then(({ data }) => {
+				dispatch({ type: NEW_PROPERTY, payload: data})
 			})
 			.catch(console.log);
 	};

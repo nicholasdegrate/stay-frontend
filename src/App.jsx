@@ -10,6 +10,7 @@ import DashBoard from './page/DashBoard';
 
 // components
 import { NavBar } from './components/includes/NavBar';
+import { PropertyShow } from './components/Property/PropertyShow';
 // helpers
 import { PrivateRoute } from './helpers/PrivateRoute';
 import { PublicRoute } from './helpers/PublicRoute';
@@ -22,7 +23,6 @@ import { isLogin } from './utils/detect-auth';
 
 export default function App() {
 	const dispatch = useDispatch();
-	const { currentUser } = useSelector((state) => state.currentHost);
 	useEffect(
 		() => {
 			if (isLogin()) {
@@ -45,12 +45,13 @@ export default function App() {
 	return (
 		<ChakraProvider resetCSS={true}>
 			<Router>
-				{(!currentUser || isLogin() === false) && <NavBar />}
+				{!!localStorage.getItem('primary-key') === false ? <NavBar /> : null}
 				<Switch>
 					{/* Public */}
 					<PublicRoute restricted={false} component={Home} path="/" exact />
 					<PublicRoute restricted={true} component={Login} path="/login" exact />
 					<PublicRoute restricted={true} component={SignUp} path="/signup" exact />
+					<PublicRoute restricted={false} component={PropertyShow} path="/properties/:id" exact />
 
 					{/* Private Route */}
 					<PrivateRoute component={DashBoard} path="/dashboard" exact />

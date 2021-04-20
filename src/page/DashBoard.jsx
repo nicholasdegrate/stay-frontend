@@ -42,7 +42,12 @@ export default function DashBoard() {
 	useEffect(
 		() => {
 			const body = document.body;
+
 			if (location.pathname === '/dashboard') return (body.style.overflow = 'hidden ');
+
+			return () => {
+				if (location.pathname !== '/dashboard') return body.style.removeProperty;
+			};
 		},
 		[ location ]
 	);

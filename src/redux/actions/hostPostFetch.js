@@ -21,9 +21,9 @@ export const hostPostFetch = (values, setSubmitting, history) => {
 			})
 			.then((data) => {
 				login(data.token);
+				setSubmitting(false)
 				history.push('/dashboard')
 				dispatch({ type: CURRENT_HOST, payload: data });
-				setSubmitting(false)
 			})
 			.catch((err) => console.log(err));
 	};

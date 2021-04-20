@@ -1,11 +1,29 @@
-import React from 'react';
-import { Flex, Heading, Text, Button, Box, Grid, Image } from '@chakra-ui/react';
-
+import React, { useRef, Fragment, useEffect } from 'react';
+import {
+	Flex,
+	Heading,
+	Text,
+	Button,
+	Box,
+	Grid,
+	Image,
+	Drawer,
+	DrawerBody,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerOverlay,
+	DrawerContent,
+	DrawerCloseButton,
+	Stack,
+	useDisclosure
+} from '@chakra-ui/react';
 // image
 import apartment from '../../image/home.jpg';
 
 export function Property({ property: { id, attributes: { address, rate, bedrooms, bathrooms } } }) {
 	const rating = parseInt(rate) * 100 / 100;
+
+	const handleEditButton = (open) => open;
 
 	return (
 		<Box
@@ -52,7 +70,9 @@ export function Property({ property: { id, attributes: { address, rate, bedrooms
 									</span>
 								</Flex>
 								<Box>
-									<Button>Edit</Button>
+									<Button onClick={handleEditButton}>Edit</Button>
+
+									{handleEditButton && <EditDrawer handleEditButton={handleEditButton} />}
 								</Box>
 							</Flex>
 							<Box>
@@ -79,5 +99,40 @@ export function Property({ property: { id, attributes: { address, rate, bedrooms
 				</Grid>
 			</Grid>
 		</Box>
+	);
+}
+
+function EditDrawer({ handleEditButton }) {
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const firstField = useRef();
+
+	useEffect(
+		() => {
+			handleEditButton(onOpen);
+		},
+		[ onOpen, handleEditButton ]
+	);
+
+	return (
+		<Fragment>
+			<Drawer isOpen={isOpen} placement="right" initialFocusRef={firstField} onClose={onClose}>
+				<DrawerOverlay>
+					<DrawerContent>
+						<DrawerCloseButton />
+						<DrawerHeader borderBottomWidth="1px"> Edit property</DrawerHeader>
+
+						<DrawerBody>
+							<Stack spacing="24px" />
+						</DrawerBody>
+
+						<DrawerFooter borderTopWidth="1px">
+							<Button variant="outline" mr={3} onClick={onClose}>
+								Cancel
+							</Button>
+						</DrawerFooter>
+					</DrawerContent>
+				</DrawerOverlay>
+			</Drawer>
+		</Fragment>
 	);
 }
