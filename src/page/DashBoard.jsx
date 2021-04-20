@@ -1,5 +1,5 @@
-import React from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
 	Box,
@@ -16,6 +16,7 @@ import {
 	InputLeftElement
 } from '@chakra-ui/react';
 import { AddIcon, SearchIcon } from '@chakra-ui/icons';
+import ReactPaginate from 'react-paginate';
 // utils
 import { logout } from '../utils/detect-auth';
 
@@ -28,13 +29,23 @@ import { Properties } from '../components/Property/Properties';
 
 export default function DashBoard() {
 	const history = useHistory();
+	const location = useLocation();
+
 	const { currentUser } = useSelector((state) => state.currentHost);
-	const { handleDrawer } = useSelector((state) => state.property);
+	const { handleDrawer, pageCount, pageHandleChange } = useSelector((state) => state.property);
 
 	const handleLogout = () => {
 		logout();
 		history.push('/');
 	};
+
+	useEffect(
+		() => {
+			const body = document.body;
+			if (location.pathname === '/dashboard') return (body.style.overflow = 'hidden ');
+		},
+		[ location ]
+	);
 
 	const handleDrawerNewProperty = () => handleDrawer();
 
@@ -98,8 +109,22 @@ export default function DashBoard() {
 						<Box justifySelf="end">
 							<ButtonGroup size="sm" isAttached variant="outline">
 								<Button>Active</Button>
-								<Button>Inative</Button>
+								<Button>Inactive</Button>
 							</ButtonGroup>
+							<Box display="inline-block" ml="3em">
+								<ReactPaginate
+									previousLabel={'←'}
+									nextLabel={'→'}
+									pageCount={pageCount}
+									onPageChange={pageHandleChange}
+									pageClassName={'link'}
+									containerClassName={'pagination'}
+									previousLinkClassName={'pagination__link'}
+									nextLinkClassName={'pagination__link'}
+									disabledClassName={'pagination__link--disabled'}
+									activeClassName={'pagination__link--active'}
+								/>
+							</Box>
 						</Box>
 					</Grid>
 					<Box padding="1em .5em">

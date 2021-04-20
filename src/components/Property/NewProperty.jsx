@@ -1,10 +1,21 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useCallback } from 'react';
 import { Formik, Form, Field } from 'formik';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Input, Stack, Button, FormControl, FormLabel, Box } from '@chakra-ui/react';
+
+// redux
+import { postFetchProperties } from '../../redux/actions/property';
 
 export function NewProperty() {
 	const { currentUser } = useSelector((state) => state.currentHost);
+	const dispatch = useDispatch();
+
+	const unMounted = useCallback(
+		(values, setSubmitting) => {
+			dispatch(postFetchProperties(values, setSubmitting));
+		},
+		[ dispatch ]
+	);
 
 	return (
 		<Fragment>
@@ -18,26 +29,8 @@ export function NewProperty() {
 					host_id: currentUser.id
 				}}
 				onSubmit={(values, { setSubmitting }) => {
-					console.log(values);
 					setTimeout(() => {
-						fetch('http://localhost:3000/api/v1/properties', {
-							method: 'POST',
-							headers: { 'Content-Type': 'application/json' },
-							body: JSON.stringify(values)
-						})
-							.then((r) => {
-								if (r.ok) {
-									return r.json();
-								} else {
-									return r.json().then((data) => {
-										throw data;
-									});
-								}
-							})
-							.then((data) => {
-								console.log(data);
-							})
-							.catch(console.log);
+						unMounted(values, setSubmitting);
 						setSubmitting(false);
 					}, 400);
 				}}

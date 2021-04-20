@@ -4,10 +4,22 @@ import { Flex, Heading, Text, Button, Box, Grid, Image } from '@chakra-ui/react'
 // image
 import apartment from '../../image/home.jpg';
 
-export function Property({ property }) {
-	console.log(property);
+export function Property({ property: { id, attributes: { address, rate, bedrooms, bathrooms } } }) {
+	const rating = parseInt(rate) * 100 / 100;
+
 	return (
-		<Box m="1em 0" w="100%" h="150px" bg="#fff" borderRadius="15px">
+		<Box
+			m="1em 0"
+			w="100%"
+			h="150px"
+			bg="#fff"
+			borderRadius="15px"
+			_hover={{ bg: '#ebedf0' }}
+			_active={{
+				bg: '#dddfe2',
+				transform: 'scale(1.01)'
+			}}
+		>
 			<Grid gridTemplateColumns="200px 1fr">
 				<Box h="150px" w="180px" padding="1em">
 					<Image borderRadius="10px" h="120px" src={apartment} />
@@ -18,11 +30,11 @@ export function Property({ property }) {
 							<Flex justifyContent="space-between" alignItems="center">
 								<Flex alignItems="center">
 									<Heading as="h3" fontSize="1.2em">
-										1312 Richmond
+										{address}
 									</Heading>
 									<span className="score">
 										<div className="score-wrap">
-											<span className="stars-active" style={{ width: '40%' }}>
+											<span className="stars-active" style={{ width: `${rating}%` }}>
 												<i className="fa fa-star" aria-hidden="true" />
 												<i className="fa fa-star" aria-hidden="true" />
 												<i className="fa fa-star" aria-hidden="true" />
@@ -44,7 +56,7 @@ export function Property({ property }) {
 								</Box>
 							</Flex>
 							<Box>
-								<Text>Richmond Place 1312, Charlotte, New York</Text>
+								<Text>{address}</Text>
 							</Box>
 						</Box>
 						<Box>
