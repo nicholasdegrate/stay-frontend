@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
-import { Redirect, useHistory, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
 	Box,
 	Grid,
-	Image,
 	Heading,
-	WrapItem,
 	Flex,
 	Button,
 	Input,
@@ -17,40 +15,15 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon, SearchIcon } from '@chakra-ui/icons';
 import ReactPaginate from 'react-paginate';
-// utils
-import { logout } from '../utils/detect-auth';
-
-// image
-import logoutBtn from '../image/logout.svg';
 
 // components
 import { NewFormDrawer } from '../components/Property/newFormDrawer';
 import { Properties } from '../components/Property/Properties';
+import { DashBoardSideBar } from '../components/Host/DashBoardSideBar';
 
 export default function DashBoard() {
-	const history = useHistory();
-	const location = useLocation();
-
 	const { currentUser } = useSelector((state) => state.currentHost);
 	const { handleDrawer, pageCount, pageHandleChange } = useSelector((state) => state.property);
-
-	const handleLogout = () => {
-		logout();
-		history.push('/');
-	};
-
-	useEffect(
-		() => {
-			const body = document.body;
-
-			if (location.pathname === '/dashboard') return (body.style.overflow = 'hidden ');
-
-			return () => {
-				if (location.pathname !== '/dashboard') return body.style.removeProperty;
-			};
-		},
-		[ location ]
-	);
 
 	const handleDrawerNewProperty = () => handleDrawer();
 
@@ -58,26 +31,7 @@ export default function DashBoard() {
 
 	return (
 		<Grid gridTemplateColumns="20% 80%">
-			<Grid padding="2em" gridTemplateRows="10% 70% 20% " h="100vh" bg="#ffffff">
-				<Box>
-					<Heading as="h2" fontSize="1.5em" display="inline-block">
-						oyo-stay
-					</Heading>
-				</Box>
-				<Box>
-					<Flex flexDirection="column">
-						<WrapItem className="dashboard-link-host">Dashboard</WrapItem>
-						<WrapItem className="dashboard-link-host">Listings</WrapItem>
-						<WrapItem className="dashboard-link-host">Providers</WrapItem>
-						<WrapItem className="dashboard-link-host">User</WrapItem>
-						<WrapItem className="dashboard-link-host">Billing</WrapItem>
-						<WrapItem className="dashboard-link-host">Setting</WrapItem>
-					</Flex>
-				</Box>
-				<Box cursor="pointer" onClick={handleLogout}>
-					<Image w="30px" src={logoutBtn} />
-				</Box>
-			</Grid>
+			<DashBoardSideBar />
 			<Box bg="#F6F8FC">
 				<Grid alignItems="center" padding="2em" gridTemplateColumns="75% 25%" h="100px" w="100%">
 					<Box>

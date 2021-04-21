@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { Box, Flex, Grid, Heading, Image, Stack, Text, Wrap, WrapItem } from '@chakra-ui/react';
+import { Box, Flex, Grid, Heading, Image, Text, Wrap } from '@chakra-ui/react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -16,8 +16,6 @@ export function PropertyShow() {
 	const { property: { showProperty } } = useSelector((state) => state);
 
 	const { id } = useParams();
-
-	console.log(id);
 
 	useEffect(
 		() => {
@@ -103,16 +101,24 @@ export function PropertyShow() {
 							</Wrap>
 						</Box>
 					</Box>
-					<Box mt="3em" padding="3em">
+					<Flex justifyContent="center" mt="3em" padding="3em">
 						<Box
+							width="400px"
 							borderRadius="40px"
 							boxShadow="md"
 							p="6"
 							rounded="md"
 							h="300px"
 							border="1px solid #e0e0e0"
-						/>
-					</Box>
+						>
+							<Flex justifyContent="space-between" alignItems="center">
+								<Text>$124 / night</Text>
+								<Text>4.56 (74 reviews)</Text>
+							</Flex>
+							<Box />
+							<Box />
+						</Box>
+					</Flex>
 				</Grid>
 			</Box>
 		</Fragment>

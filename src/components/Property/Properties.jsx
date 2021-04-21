@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 // components
 import { Property } from './Property';
 
@@ -28,11 +27,9 @@ export function Properties() {
 
 	const offset = currentPage * PER_PAGE;
 
-	const currentPageData = properties.slice(offset, offset + PER_PAGE).map((property) => (
-		<Link key={property.id} to={`/properties/${property.id}`}>
-			<Property property={property} />
-		</Link>
-	));
+	const currentPageData = properties
+		.slice(offset, offset + PER_PAGE)
+		.map((property) => <Property key={property.id} property={property} />);
 
 	const pageCount = Math.ceil(properties.length / PER_PAGE);
 

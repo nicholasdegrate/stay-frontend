@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // page
 import Home from './page/Home';
 import Login from './page/Login';
@@ -11,6 +11,7 @@ import DashBoard from './page/DashBoard';
 // components
 import { NavBar } from './components/includes/NavBar';
 import { PropertyShow } from './components/Property/PropertyShow';
+import { Setting } from './components/Host/Setting';
 // helpers
 import { PrivateRoute } from './helpers/PrivateRoute';
 import { PublicRoute } from './helpers/PublicRoute';
@@ -55,6 +56,7 @@ export default function App() {
 
 					{/* Private Route */}
 					<PrivateRoute component={DashBoard} path="/dashboard" exact />
+					<PrivateRoute component={Setting} path="/dashboard/settings" exact />
 				</Switch>
 			</Router>
 		</ChakraProvider>

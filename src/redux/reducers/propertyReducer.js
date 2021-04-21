@@ -1,4 +1,4 @@
-import { SHOW_PROPERTY,HANDLE_PAGE_CLICK,PAGE_COUNT,  HANDLE_DRAWER, FETCH_ALL_PROPERTIES, NEW_PROPERTY } from '../actions/types';
+import { PATCH_FETCH_PROPERTY ,SHOW_PROPERTY,HANDLE_PAGE_CLICK,PAGE_COUNT,  HANDLE_DRAWER, FETCH_ALL_PROPERTIES, NEW_PROPERTY } from '../actions/types';
 
 const initialState = {
 	handleDrawer: null,
@@ -23,6 +23,8 @@ export default function reducer(state = initialState, action) {
 			return { ...state, pageCount: action.payload };
 		case SHOW_PROPERTY:
 			return { ...state, showProperty: action.payload };
+		case PATCH_FETCH_PROPERTY:
+			return {...state, properties: [...state.properties, action.payload]}
 		default:
 			return state;
 	}
