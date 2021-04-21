@@ -17,6 +17,10 @@ import {
 	useDisclosure
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+// redux
+import { DELETE_PROPERTY } from '../../redux/actions/types';
 // components
 import { UpdateProperty } from './UpdateProperty';
 
@@ -24,11 +28,27 @@ import { UpdateProperty } from './UpdateProperty';
 import apartment from '../../image/home.jpg';
 
 export function Property({
-	property: { id, attributes: { 'property-type': property_type, address, rate, bedrooms, bathrooms } }
+	property: {
+		id,
+		attributes: {
+			'address-description': addressDescription,
+			'address-name': addressName,
+			bathrooms,
+			bedrooms,
+			door,
+			energy,
+			guest,
+			location,
+			noise,
+			price,
+			rate
+		}
+	}
 }) {
 	const { isOpen, onOpen, onClose } = useDisclosure();
+	const dispatch = useDispatch();
 	const btnRef = React.useRef();
-	const rating = parseInt(rate) * 100 / 100;
+	const rating = parseFloat((rate * 2 * 10).toFixed(2));
 
 	const handleDelete = () => {
 		fetch(`http://localhost:3000/api/v1/properties/${id}`, {
@@ -38,6 +58,7 @@ export function Property({
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);
+				dispatch({ type: DELETE_PROPERTY, payload: id });
 			});
 	};
 
@@ -67,7 +88,7 @@ export function Property({
 								<Flex justifyContent="space-between" alignItems="center">
 									<Flex alignItems="center">
 										<Heading as="h3" fontSize="1.2em">
-											{address}
+											{addressName}
 										</Heading>
 										<span className="score">
 											<div className="score-wrap">
@@ -108,11 +129,15 @@ export function Property({
 
 													<DrawerBody>
 														<UpdateProperty
-															id={id}
+															addressDescription={addressDescription}
+															addressName={addressName}
 															bathrooms={bathrooms}
 															bedrooms={bedrooms}
-															address={address}
-															property_type={property_type}
+															door={door}
+															guest={guest}
+															price={price}
+															rating={rating}
+															id={id}
 														/>
 													</DrawerBody>
 
@@ -128,22 +153,22 @@ export function Property({
 									</Box>
 								</Flex>
 								<Box>
-									<Text>{address}</Text>
+									<Text>{addressDescription}</Text>
 								</Box>
 							</Box>
 							<Box>
 								<Grid w="80%" gridTemplateColumns="1fr 1fr 1fr">
 									<Box>
 										<Text>Door</Text>
-										<Text>Locked</Text>
+										<Text>{door}</Text>
 									</Box>
 									<Box>
 										<Text>Avg.energy usage</Text>
-										<Text>592kWh</Text>
+										<Text>{energy}kWh</Text>
 									</Box>
 									<Box>
 										<Text>Noise level</Text>
-										<Text>59 dB</Text>
+										<Text>{noise} dB</Text>
 									</Box>
 								</Grid>
 							</Box>

@@ -1,4 +1,4 @@
-import { PATCH_FETCH_PROPERTY ,SHOW_PROPERTY,HANDLE_PAGE_CLICK,PAGE_COUNT,  HANDLE_DRAWER, FETCH_ALL_PROPERTIES, NEW_PROPERTY } from '../actions/types';
+import { DELETE_PROPERTY, PATCH_FETCH_PROPERTY ,SHOW_PROPERTY,HANDLE_PAGE_CLICK,PAGE_COUNT,  HANDLE_DRAWER, FETCH_ALL_PROPERTIES, NEW_PROPERTY } from '../actions/types';
 
 const initialState = {
 	handleDrawer: null,
@@ -6,7 +6,23 @@ const initialState = {
 	property: {},
 	pageCount: null,
 	pageHandleChange: null,
-	showProperty: {data: {attributes: {address: ''}}}
+	showProperty: {
+		data: {
+			attributes: {
+				'address-description':	'',				
+				'address-name': '',
+				bathrooms: '',
+				bedrooms: '',
+				door: '',
+				energy: '',
+				guests: '',
+				location: '',
+				Noise: '',
+				price: null,
+				'property-type': ''
+			}
+		}
+	}
 };
 
 export default function reducer(state = initialState, action) {
@@ -24,6 +40,11 @@ export default function reducer(state = initialState, action) {
 		case SHOW_PROPERTY:
 			return { ...state, showProperty: action.payload };
 		case PATCH_FETCH_PROPERTY:
+			// console.log('action', action.payload)
+			// console.log('properties', ...state.properties)
+			return { ...state, properties: [...state.properties, action.payload] }
+		case DELETE_PROPERTY:
+			console.log(action.payload)
 			return {...state, properties: [...state.properties, action.payload]}
 		default:
 			return state;

@@ -13,6 +13,7 @@ export const getFetchProperties = (id) => {
 				}
 			})
 			.then(({ data }) => {
+
 				const properties = data.filter(
 					(currentUserProperties) => currentUserProperties.attributes['host-id'] === id
 				);

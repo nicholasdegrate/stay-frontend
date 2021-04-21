@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // page
 import Home from './page/Home';
 import Login from './page/Login';
@@ -24,6 +24,8 @@ import { isLogin } from './utils/detect-auth';
 
 export default function App() {
 	const dispatch = useDispatch();
+	const { currentUser } = useSelector((state) => state.currentHost);
+
 	useEffect(
 		() => {
 			if (isLogin()) {
@@ -46,7 +48,7 @@ export default function App() {
 	return (
 		<ChakraProvider resetCSS={true}>
 			<Router>
-				{!!localStorage.getItem('primary-key') === false ? <NavBar /> : null}
+				{!currentUser && <NavBar />}
 				<Switch>
 					{/* Public */}
 					<PublicRoute restricted={false} component={Home} path="/" exact />
