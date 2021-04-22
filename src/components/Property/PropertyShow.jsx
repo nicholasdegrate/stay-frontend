@@ -148,6 +148,13 @@ export function PropertyShow() {
 				</Grid>
 				<hr />
 				<Grid
+					display={
+						typeof included === 'undefined' || (typeof included === 'object' && !included.length) ? (
+							'none'
+						) : (
+							'grid'
+						)
+					}
 					mt="3em"
 					h="800px"
 					w="100%"

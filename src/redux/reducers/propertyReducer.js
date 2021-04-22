@@ -51,7 +51,6 @@ export default function reducer(state = initialState, action) {
 		case SHOW_PROPERTY:
 			return { ...state, showProperty: action.payload };
 		case PATCH_FETCH_PROPERTY:
-			console.log(...state.properties)
 			const patchPropertyFromJSON = [...state.properties].map((property) => {
 				if (property.id === action.payload.id) return action.payload;
 				return property;

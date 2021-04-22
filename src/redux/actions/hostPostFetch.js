@@ -23,7 +23,7 @@ export const hostPostFetch = (values, setSubmitting, history) => {
 				login(data.token);
 				setSubmitting(false)
 				history.push('/dashboard')
-				dispatch({ type: CURRENT_HOST, payload: data });
+				dispatch({ type: CURRENT_HOST, payload: data.host.data });
 			})
 			.catch((err) => console.log(err));
 	};

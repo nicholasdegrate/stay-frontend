@@ -4,6 +4,9 @@ import { Box, Grid, Heading, Text, Button, Image } from '@chakra-ui/react';
 // images
 import apartment from '../image/home.jpg';
 
+// components
+import { NavBar } from '../components/includes/NavBar';
+
 export default function Home() {
 	const whitespace = [ ...Array(80).keys() ].map((i) => (
 		<Box key={i} h="5px" w="5px" bg="gray.300" borderRadius="10px" />
@@ -15,6 +18,7 @@ export default function Home() {
 
 	return (
 		<Fragment>
+			<NavBar />
 			<Box position="absolute" bg="#FFF8F8" zIndex={-1} h="80%" w="50%" top="-1em" />
 			<Grid h="calc(100vh - 90px)" overflow="hidden" gridTemplateColumns="1fr 1fr">
 				<Box display="flex" alignItems="center">

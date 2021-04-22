@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // page
 import Home from './page/Home';
 import DashBoard from './page/DashBoard';
 
 // components
-import { NavBar } from './components/includes/NavBar';
 import { PropertyShow } from './components/Property/PropertyShow';
 import { Setting } from './components/Host/Setting';
 import { PropertiesCollection } from './components/Property/PropertiesCollection';
@@ -23,7 +22,6 @@ import { isLogin } from './utils/detect-auth';
 
 export default function App() {
 	const dispatch = useDispatch();
-	const { currentUser } = useSelector((state) => state.currentHost);
 
 	useEffect(
 		() => {
@@ -47,12 +45,10 @@ export default function App() {
 	return (
 		<ChakraProvider resetCSS={true}>
 			<Router>
-				{!currentUser && <NavBar />}
 				<Switch>
 					{/* Public */}
 					<PublicRoute restricted={false} component={Home} path="/" exact />
 					<PublicRoute restricted={false} component={PropertiesCollection} path="/properties" exact />
-
 					<PublicRoute restricted={false} component={PropertyShow} path="/properties/:id" exact />
 
 					{/* Private Route */}

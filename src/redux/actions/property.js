@@ -14,7 +14,7 @@ export const getFetchProperties = (id) => {
 			})
 			.then(({ data }) => {
 				const properties = data.filter(
-					(currentUserProperties) => currentUserProperties.attributes['host-id'] === id
+					(currentUserProperties) => currentUserProperties.attributes['host-id'] === parseInt(id)
 				);
 				dispatch({ type: FETCH_ALL_PROPERTIES, payload: properties });
 			})
@@ -46,7 +46,6 @@ export const postFetchProperties = (properties) => {
 };
 
 export const patchFetchProperties = (properties, setSubmitting, id) => {
-	console.log('before', properties)
 	return (dispatch) => {
 		fetch(`http://localhost:3000/api/v1/properties/${id}`, {
 			method: 'PATCH',
@@ -64,7 +63,6 @@ export const patchFetchProperties = (properties, setSubmitting, id) => {
 			})
 			.then(({ data }) => {
 				setSubmitting(false);
-				console.log('after',data)
 				dispatch({ type: PATCH_FETCH_PROPERTY, payload: data });
 			})
 			.catch(console.log);

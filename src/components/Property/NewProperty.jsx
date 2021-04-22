@@ -23,9 +23,16 @@ export function NewProperty() {
 				initialValues={{
 					property_type: '',
 					rate: '',
-					address: '',
+					address_name: '',
+					address_description: '',
+					guest: '',
+					location: '',
+					price: '',
 					bedrooms: '',
 					bathrooms: '',
+					door: 'locked',
+					energy: '',
+					noise: '',
 					host_id: currentUser.id
 				}}
 				onSubmit={(values, { setSubmitting }) => {
@@ -39,14 +46,36 @@ export function NewProperty() {
 					<Form>
 						<Stack spacing="24px">
 							<FormControl>
-								<FormLabel>Property Type</FormLabel>
+								<FormLabel>Full Address</FormLabel>
 								<Field
 									as={Input}
 									type="text"
-									name="property_type"
+									name="address_name"
 									onChange={handleChange}
-									placeholder="property type"
-									values={values.property_type}
+									placeholder="address"
+									values={values.address_name}
+								/>
+							</FormControl>
+							<FormControl>
+								<FormLabel>Address Title</FormLabel>
+								<Field
+									as={Input}
+									type="text"
+									name="address_description"
+									onChange={handleChange}
+									placeholder="address"
+									values={values.address_description}
+								/>
+							</FormControl>
+							<FormControl>
+								<FormLabel>Price</FormLabel>
+								<Field
+									as={Input}
+									type="text"
+									name="price"
+									onChange={handleChange}
+									placeholder="price"
+									values={values.price}
 								/>
 							</FormControl>
 							<Box display="none">
@@ -60,18 +89,40 @@ export function NewProperty() {
 								/>
 							</Box>
 							<FormControl>
-								<FormLabel>Address</FormLabel>
+								<FormLabel>Guest</FormLabel>
 								<Field
 									as={Input}
 									type="text"
-									name="address"
+									name="guest"
 									onChange={handleChange}
-									placeholder="Address"
-									values={values.address}
+									placeholder="guest"
+									values={values.guest}
 								/>
 							</FormControl>
 							<FormControl>
-								<FormLabel>Bedroom</FormLabel>
+								<FormLabel>Energy Power</FormLabel>
+								<Field
+									as={Input}
+									type="text"
+									name="energy"
+									onChange={handleChange}
+									placeholder="energy"
+									values={values.energy}
+								/>
+							</FormControl>
+							<FormControl>
+								<FormLabel>Noise Level</FormLabel>
+								<Field
+									as={Input}
+									type="text"
+									name="noise"
+									onChange={handleChange}
+									placeholder="noise"
+									values={values.noise}
+								/>
+							</FormControl>
+							<FormControl>
+								<FormLabel>Bedrooms</FormLabel>
 								<Field
 									as={Input}
 									type="number"
@@ -82,7 +133,7 @@ export function NewProperty() {
 								/>
 							</FormControl>
 							<FormControl>
-								<FormLabel>Bathroom</FormLabel>
+								<FormLabel>Bathrooms</FormLabel>
 								<Field
 									as={Input}
 									type="number"
