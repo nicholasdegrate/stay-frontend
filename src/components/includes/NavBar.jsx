@@ -12,8 +12,7 @@ import {
 	DrawerOverlay,
 	DrawerContent,
 	DrawerCloseButton,
-	useDisclosure,
-	Input
+	useDisclosure
 } from '@chakra-ui/react';
 
 // component
@@ -32,14 +31,12 @@ export function NavBar() {
 					<NavLink className="nav-link" to="/">
 						Home
 					</NavLink>
-					<NavLink className="nav-link" to="/properties">
+					{/* <NavLink className="nav-link" to="/properties">
 						Properties
-					</NavLink>
+					</NavLink> */}
 				</Box>
 				<Box alignSelf="flex-end">
-					<NavLink ref={btnRef} onClick={onOpen} className="nav-link" to="/">
-						Login
-					</NavLink>
+					<NavLink display="none !important" ref={btnRef} onClick={onOpen} className="nav-link" to="/" />
 					<Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef}>
 						<DrawerOverlay>
 							<DrawerContent>
@@ -58,15 +55,22 @@ export function NavBar() {
 							</DrawerContent>
 						</DrawerOverlay>
 					</Drawer>
-					<NavLink className="nav-link" to="/signup">
+					{/* <NavLink className="nav-link" to="/signup">
 						Sign In
-					</NavLink>
-					<Button mt="-.2em" bg="none" color="#DD6B20" _hover={{ backgroundColor: 'none' }}>
-						<NavLink ref={btnRef} onClick={onOpen} className="nav-link get-started" to="/">
-							Get Started
+					</NavLink> */}
+					<Button
+						ref={btnRef}
+						onClick={onOpen}
+						mt="-.2em"
+						bg="none"
+						color="#DD6B20"
+						_hover={{ backgroundColor: 'none' }}
+					>
+						<NavLink className="nav-link get-started" to="/">
+							Login
 						</NavLink>
 					</Button>
-					<Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef}>
+					{/* <Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef}>
 						<DrawerOverlay>
 							<DrawerContent>
 								<DrawerCloseButton />
@@ -83,7 +87,7 @@ export function NavBar() {
 								</DrawerFooter>
 							</DrawerContent>
 						</DrawerOverlay>
-					</Drawer>
+					</Drawer> */}
 				</Box>
 			</Flex>
 		</Fragment>

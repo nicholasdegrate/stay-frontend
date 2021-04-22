@@ -1,7 +1,7 @@
 import React, { Fragment, useCallback } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useHistory } from 'react-router-dom';
-import { FormControl, Input, Box, Button, Stack, Heading } from '@chakra-ui/react';
+import { FormControl, Input, Button, Stack } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 // redux
 import { hostPostFetch } from '../../redux/actions/hostPostFetch';

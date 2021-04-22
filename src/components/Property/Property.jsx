@@ -136,7 +136,9 @@ export function Property({
 															door={door}
 															guest={guest}
 															price={price}
-															rating={rating}
+															noise={noise}
+															location={location}
+															rate={rate}
 															id={id}
 														/>
 													</DrawerBody>

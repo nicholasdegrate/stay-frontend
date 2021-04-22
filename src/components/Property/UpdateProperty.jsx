@@ -6,7 +6,21 @@ import { Input, Stack, Button, FormControl, FormLabel, Box } from '@chakra-ui/re
 // redux
 import { patchFetchProperties } from '../../redux/actions/property';
 
-export function UpdateProperty({ id, property_type, address, bedrooms, bathrooms }) {
+export function UpdateProperty({
+	id,
+	property_type,
+	bedrooms,
+	bathrooms,
+	location,
+	door,
+	guest,
+	price,
+	rate,
+	energy,
+	noise,
+	addressDescription,
+	addressName
+}) {
 	const { currentUser } = useSelector((state) => state.currentHost);
 	const dispatch = useDispatch();
 
@@ -22,14 +36,22 @@ export function UpdateProperty({ id, property_type, address, bedrooms, bathrooms
 			<Formik
 				initialValues={{
 					property_type: property_type,
-					rate: '',
-					address: address,
+					rate: rate,
+					address_name: addressName,
+					address_description: addressDescription,
+					guest: guest,
+					location: location,
+					price: price,
 					bedrooms: bedrooms,
 					bathrooms: bathrooms,
+					door: door,
+					energy: energy,
+					noise: noise,
 					host_id: currentUser.id
 				}}
 				onSubmit={(values, { setSubmitting }) => {
 					setTimeout(() => {
+						console.log(values);
 						unMounted(values, setSubmitting);
 						setSubmitting(false);
 					}, 400);
@@ -39,35 +61,14 @@ export function UpdateProperty({ id, property_type, address, bedrooms, bathrooms
 					<Form>
 						<Stack spacing="24px">
 							<FormControl>
-								<FormLabel>Property Type</FormLabel>
+								<FormLabel>Address Description</FormLabel>
 								<Field
 									as={Input}
 									type="text"
-									name="property_type"
+									name="address_description"
 									onChange={handleChange}
-									placeholder="property type"
-									values={values.property_type}
-								/>
-							</FormControl>
-							<Box display="none">
-								<Field
-									as={Input}
-									type="number"
-									name="rate"
-									onChange={handleChange}
-									placeholder="email"
-									values={(values.rate = 0)}
-								/>
-							</Box>
-							<FormControl>
-								<FormLabel>Address</FormLabel>
-								<Field
-									as={Input}
-									type="text"
-									name="address"
-									onChange={handleChange}
-									placeholder="Address"
-									values={values.address}
+									placeholder="address"
+									values={values.address_description}
 								/>
 							</FormControl>
 							<FormControl>

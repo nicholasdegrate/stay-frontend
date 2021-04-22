@@ -4,8 +4,6 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 // page
 import Home from './page/Home';
-import Login from './page/Login';
-import SignUp from './page/SignUp';
 import DashBoard from './page/DashBoard';
 
 // components

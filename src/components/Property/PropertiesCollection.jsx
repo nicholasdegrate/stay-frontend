@@ -67,7 +67,7 @@ export function PropertiesCollection() {
 						minH="660px"
 						borderTopLeftRadius="20px"
 						borderTopRightRadius="20px"
-						gridTemplateRows="repeat(auto)"
+						gridTemplateRows="repeat(2, 1fr)"
 						gridTemplateColumns="repeat(auto-fit, 240px)
                     "
 						gap="10px"

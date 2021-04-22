@@ -33,7 +33,7 @@ const initialState = {
 			}
 		}
 	},
-	all_properties_for_clients: {data: []}
+	all_properties_for_clients: { data: [] }
 };
 
 export default function reducer(state = initialState, action) {
@@ -51,8 +51,12 @@ export default function reducer(state = initialState, action) {
 		case SHOW_PROPERTY:
 			return { ...state, showProperty: action.payload };
 		case PATCH_FETCH_PROPERTY:
-			const patchPropertyFromJSON = [ ...state.properties ].filter((id) => id.id !== action.payload.id);
-			return { ...state, properties: [ action.payload, ...patchPropertyFromJSON ] };
+			console.log(...state.properties)
+			const patchPropertyFromJSON = [...state.properties].map((property) => {
+				if (property.id === action.payload.id) return action.payload;
+				return property;
+			});
+			return { ...state, properties: [...patchPropertyFromJSON] };
 		case DELETE_PROPERTY:
 			const deletePropertyFromJSON = [ ...state.properties ].filter((id) => id.id !== action.payload);
 			return { ...state, properties: [ ...deletePropertyFromJSON ] };
