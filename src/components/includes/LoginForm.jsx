@@ -1,7 +1,7 @@
 import React, { Fragment, useCallback } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useHistory } from 'react-router-dom';
-import { FormControl, Input, Box, Button } from '@chakra-ui/react';
+import { FormControl, Input, Box, Button, Stack, Heading } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 // redux
 import { hostPostFetch } from '../../redux/actions/hostPostFetch';
@@ -19,7 +19,6 @@ export function LoginForm() {
 
 	return (
 		<Fragment>
-			<h1>login</h1>
 			<Formik
 				initialValues={{ email: '', password: '' }}
 				onSubmit={(values, { setSubmitting }) => {
@@ -30,7 +29,7 @@ export function LoginForm() {
 			>
 				{({ isSubmitting, handleChange }) => (
 					<Form>
-						<Box w="400px">
+						<Stack spacing="24px">
 							<FormControl>
 								<Field
 									as={Input}
@@ -52,7 +51,7 @@ export function LoginForm() {
 							<Button type="submit" disabled={isSubmitting}>
 								Submit
 							</Button>
-						</Box>
+						</Stack>
 					</Form>
 				)}
 			</Formik>

@@ -1,8 +1,27 @@
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Box, Flex, Heading, Button } from '@chakra-ui/react';
+import {
+	Box,
+	Flex,
+	Heading,
+	Button,
+	Drawer,
+	DrawerBody,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerOverlay,
+	DrawerContent,
+	DrawerCloseButton,
+	useDisclosure,
+	Input
+} from '@chakra-ui/react';
+
+// component
+import { LoginForm } from './LoginForm';
 
 export function NavBar() {
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const btnRef = React.useRef();
 	return (
 		<Fragment>
 			<Flex id="navbar" alignItems="center" justifyContent="space-between" h="50px" m="1em">
@@ -18,17 +37,53 @@ export function NavBar() {
 					</NavLink>
 				</Box>
 				<Box alignSelf="flex-end">
-					<NavLink className="nav-link" to="/login">
+					<NavLink ref={btnRef} onClick={onOpen} className="nav-link" to="/">
 						Login
 					</NavLink>
+					<Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef}>
+						<DrawerOverlay>
+							<DrawerContent>
+								<DrawerCloseButton />
+								<DrawerHeader>Login</DrawerHeader>
+
+								<DrawerBody>
+									<LoginForm />
+								</DrawerBody>
+
+								<DrawerFooter>
+									<Button variant="outline" mr={3} onClick={onClose}>
+										Cancel
+									</Button>
+								</DrawerFooter>
+							</DrawerContent>
+						</DrawerOverlay>
+					</Drawer>
 					<NavLink className="nav-link" to="/signup">
 						Sign In
 					</NavLink>
 					<Button mt="-.2em" bg="none" color="#DD6B20" _hover={{ backgroundColor: 'none' }}>
-						<NavLink className="nav-link get-started" to="/signup">
+						<NavLink ref={btnRef} onClick={onOpen} className="nav-link get-started" to="/">
 							Get Started
 						</NavLink>
 					</Button>
+					<Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef}>
+						<DrawerOverlay>
+							<DrawerContent>
+								<DrawerCloseButton />
+								<DrawerHeader>Login</DrawerHeader>
+
+								<DrawerBody>
+									<LoginForm />
+								</DrawerBody>
+
+								<DrawerFooter>
+									<Button variant="outline" mr={3} onClick={onClose}>
+										Cancel
+									</Button>
+								</DrawerFooter>
+							</DrawerContent>
+						</DrawerOverlay>
+					</Drawer>
 				</Box>
 			</Flex>
 		</Fragment>

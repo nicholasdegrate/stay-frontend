@@ -1,5 +1,5 @@
 export const CURRENT_HOST = 'CURRENT_HOST'
-
+export const PATCH_HOST = 'PATCH_HOST'
 /* 
     properties
 */
@@ -11,3 +11,4 @@ export const SHOW_PROPERTY = 'SHOW_PROPERTY'
 export const PAGE_COUNT = 'PAGE_COUNT'
 export const HANDLE_PAGE_CLICK = 'HANDLE_PAGE_CLICK'
 export const DELETE_PROPERTY = 'DELETE_PROPERTY'
+export const FETCH_PROPERTIES_FOR_ALL_CLIENTS = 'FETCH_PROPERTIES_FOR_ALL_CLIENTS'

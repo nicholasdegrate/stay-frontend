@@ -1,4 +1,4 @@
-import { FETCH_ALL_PROPERTIES, NEW_PROPERTY, PATCH_FETCH_PROPERTY } from './types';
+import { FETCH_PROPERTIES_FOR_ALL_CLIENTS , FETCH_ALL_PROPERTIES, NEW_PROPERTY, PATCH_FETCH_PROPERTY } from './types';
 
 export const getFetchProperties = (id) => {
 	return (dispatch) => {
@@ -13,7 +13,6 @@ export const getFetchProperties = (id) => {
 				}
 			})
 			.then(({ data }) => {
-
 				const properties = data.filter(
 					(currentUserProperties) => currentUserProperties.attributes['host-id'] === id
 				);
@@ -22,7 +21,6 @@ export const getFetchProperties = (id) => {
 			.catch((err) => console.log(err));
 	};
 };
-
 
 export const postFetchProperties = (properties) => {
 	return (dispatch) => {
@@ -41,13 +39,11 @@ export const postFetchProperties = (properties) => {
 				}
 			})
 			.then(({ data }) => {
-				dispatch({ type: NEW_PROPERTY, payload: data})
+				dispatch({ type: NEW_PROPERTY, payload: data });
 			})
 			.catch(console.log);
 	};
 };
-
-
 
 export const patchFetchProperties = (properties, setSubmitting, id) => {
 	return (dispatch) => {
@@ -66,9 +62,28 @@ export const patchFetchProperties = (properties, setSubmitting, id) => {
 				}
 			})
 			.then(({ data }) => {
-				setSubmitting(false)
-				dispatch({ type: PATCH_FETCH_PROPERTY, payload: data})
+				setSubmitting(false);
+				dispatch({ type: PATCH_FETCH_PROPERTY, payload: data });
 			})
 			.catch(console.log);
+	};
+};
+
+export const getAllFetchProperties = () => {
+	return (dispatch) => {
+		fetch('http://localhost:3000/api/v1/properties')
+			.then((r) => {
+				if (r.ok) {
+					return r.json();
+				} else {
+					return r.json().then((data) => {
+						throw data;
+					});
+				}
+			})
+			.then((data) => {
+				dispatch({ type: FETCH_PROPERTIES_FOR_ALL_CLIENTS, payload: data})
+			})
+			.catch((err) => console.log(err));
 	};
 };

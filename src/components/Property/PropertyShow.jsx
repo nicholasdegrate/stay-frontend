@@ -100,7 +100,7 @@ export function PropertyShow() {
 									<Heading fontSize="1em">Entire home</Heading>
 									<Text>You’ll have the cabin to yourself.</Text>
 								</Box>
-								<Box>
+								<Box w="100%">
 									<Heading fontSize="1em">Self check-in Check yourself in with the keypad </Heading>
 									<Text>Check yourself in with the keypad</Text>
 								</Box>
@@ -108,11 +108,11 @@ export function PropertyShow() {
 									<Heading fontSize="1em">Clean and tidy</Heading>
 									<Text>8 recent guests said this place was sparkling clean</Text>
 								</Box>
-								<Box>
+								<Box w="100%">
 									<Heading fontSize="1em">Cancellation policy</Heading>
 									<Text>Add your trip dates to get the cancellation details for this stay.</Text>
 								</Box>
-								<Box>
+								<Box w="100%">
 									<Heading fontSize="1em">House rules</Heading>
 									<Text>The host doesn’t allow pets, parties, or smoking. Get details</Text>
 								</Box>

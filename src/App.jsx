@@ -12,6 +12,7 @@ import DashBoard from './page/DashBoard';
 import { NavBar } from './components/includes/NavBar';
 import { PropertyShow } from './components/Property/PropertyShow';
 import { Setting } from './components/Host/Setting';
+import { PropertiesCollection } from './components/Property/PropertiesCollection';
 // helpers
 import { PrivateRoute } from './helpers/PrivateRoute';
 import { PublicRoute } from './helpers/PublicRoute';
@@ -52,8 +53,8 @@ export default function App() {
 				<Switch>
 					{/* Public */}
 					<PublicRoute restricted={false} component={Home} path="/" exact />
-					<PublicRoute restricted={true} component={Login} path="/login" exact />
-					<PublicRoute restricted={true} component={SignUp} path="/signup" exact />
+					<PublicRoute restricted={false} component={PropertiesCollection} path="/properties" exact />
+
 					<PublicRoute restricted={false} component={PropertyShow} path="/properties/:id" exact />
 
 					{/* Private Route */}
