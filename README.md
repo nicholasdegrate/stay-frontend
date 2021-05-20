@@ -3,7 +3,6 @@
 <h3>Tech Stack</h3>
 
 <ul>
-
     <li>React</li>
     <li>TypeScript</li>
     <li>Redux</li>
